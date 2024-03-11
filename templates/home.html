@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block content%}
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col-sm-8 ">
+            <h1 style="color : white">Secret's</h1>
+            <p style="color : white">
+                || Don't think much, "SPEAK YOUR HEART OUT", It's one life, You dont need to stess youself. ||
+            </P><br/>
+
+            {% for smitch in smitches %}
+            <div class="alert alert-success" role="alert">
+                {% comment %} {{ smitch.body }}<br/>
+                                <small class="text-muted">
+                                    {{ smitch.created_at }} By @{{ smitch.user.username }}
+                                </small> {% endcomment %}
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-2">
+
+                                {% if smitch.user.profile.profile_image %} 
+                                <img src="{{ smitch.user.profile.profile_image.url }}" width=50 height=50 class="img-fluid rounded-circle" alt="{{profile.user.username}}">
+                                {% else %}
+                                <img src="{% static 'images/default.png' %}" width=50 height= 50 class="img-fluid rounded-circle" alt="{{profile.user.username}}">
+                                {% endif %}
+                        
+                            </div>
+                            
+                            <div class="col-9">
+                                {{ smitch.body }}<br/>
+                                <small class="text-muted">
+                                    {{ smitch.created_at }} By
+                                    @{{ smitch.user.username }}
+                                    &nbsp;&nbsp;{{ smitch.number_of_likes}} 
+                                    {% if user in smitch.likes.all %}
+                                        <a href="{% url "smitch_like" smitch.id %}"><i class="fa fa-heart" style="color:red"></i></a>
+                                    {% else %}
+                                        <a href="{% url "smitch_like" smitch.id %}"><i class="fa fa-heart-o" style="color:red"></i></a>
+                                    {% endif %}
+                                    &nbsp;&nbsp;
+                                    <a href="{% url 'smitch_share' smitch.id %}"><i class="fa fa-send" style="color:blue"></i></a>
+                                    
+                                </small>
+                            </div><br/>
+
+                        </div>                     
+                    </div>
+
+
+            </div><br/>
+            {% empty %}
+            <h2 style="color:white">None Yet</h2>                    
+            {% endfor %}
+
+        </div>
+
+        <div class="col-4">
+            <br/><br/><br/>
+            {% if form %}
+            <form method=POST>
+                {% csrf_token %}
+                {{ form.as_p}}
+                <button type="submit" class="btn btn-primary">Smitch!</button>
+            </form>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+                
+{% endblock %}

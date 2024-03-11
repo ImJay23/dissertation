@@ -1,0 +1,25 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{%block content%}
+
+    <h1>Search smitch</h1>
+
+    <form method=POST>
+        <br/>
+        {% csrf_token %}
+        <input type="input" class="form-control"placeholder="Search a smitch" name="search"><br/>
+        <button type="submit" class="btn btn-primary">Search Smitch!</button>
+    </form> 
+</br></br>
+    {% if search %}
+
+        <h3> You Searched For : {{ search }}</h3><br>
+
+        {% for smitch in searched %}
+            {{smitch}}<br>
+        {% endfor %}
+
+    {% endif %}
+
+{% endblock %}
