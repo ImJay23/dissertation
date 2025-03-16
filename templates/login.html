@@ -6,7 +6,7 @@
 <h1>You're Already Logged In!</h1>
 {% else %}
 <div class="col-sm-6 offset-sm-3">
-    <h1>Login</h1>
+    <h1 style="color: white;">Login</h1>
     <br/>
     <form method="POST" action="{% url 'login' %}">
         {% csrf_token %}
@@ -18,7 +18,7 @@
             <input type="password" class="form-control" name="password" placeholder="Enter Your Password">
         </div><br/>
 
-        <button type="submit" class="btn btn-secondary">Submit</button>
+        <button type="submit" class="btn btn-secondary px-5">Submit</button>
       </form>
 
 </div>

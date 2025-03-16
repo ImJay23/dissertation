@@ -3,13 +3,13 @@
 {% load static %}
 {%block content%}
 
-    <h1>Search smitch</h1>
+    <h1 style="color: white;">Search a smitch</h1>
 
     <form method=POST>
         <br/>
         {% csrf_token %}
-        <input type="input" class="form-control"placeholder="Search a smitch" name="search"><br/>
-        <button type="submit" class="btn btn-primary">Search Smitch!</button>
+        <input type="input" class="form-control"placeholder="Search..." name="search"><br/>
+        <button type="submit" class="btn btn-primary px-5">Search</button>
     </form> 
 </br></br>
     {% if search %}
